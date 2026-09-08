@@ -26,17 +26,33 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
 
+  const [adminEmail, setAdminEmail] = useState<string>('');
+
   useEffect(() => {
     if (pathname === '/admin/login') {
       setAuthenticated(true);
       return;
     }
 
-    const session = localStorage.getItem('copete_dulzura_admin_session');
-    if (!session) {
+    const sessionRaw = localStorage.getItem('copete_dulzura_admin_session');
+    if (!sessionRaw) {
       router.push('/admin/login');
-    } else {
+      return;
+    }
+
+    try {
+      const session = JSON.parse(sessionRaw);
+      const targetEmail = 'carolinaserey2019@icloud.com';
+      if (!session || session.role !== 'admin' || session.email?.toLowerCase().trim() !== targetEmail) {
+        localStorage.removeItem('copete_dulzura_admin_session');
+        router.push('/admin/login');
+        return;
+      }
+      setAdminEmail(session.email);
       setAuthenticated(true);
+    } catch {
+      localStorage.removeItem('copete_dulzura_admin_session');
+      router.push('/admin/login');
     }
   }, [pathname, router]);
 
@@ -137,6 +153,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* Acciones inferiores */}
         <div className="pt-6 border-t border-zinc-900 space-y-2">
+          {adminEmail && (
+            <div className="px-3 py-2 rounded-2xl bg-zinc-900/80 border border-brand-pink/20 text-[11px] mb-2">
+              <span className="text-brand-pink-light block text-[10px] uppercase font-extrabold tracking-wider">Super Admin</span>
+              <span className="text-zinc-200 font-medium truncate block">{adminEmail}</span>
+            </div>
+          )}
+
           <Link
             href="/"
             className="flex items-center gap-2 px-3.5 py-2.5 rounded-2xl text-xs font-bold text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors"

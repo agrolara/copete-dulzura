@@ -12,23 +12,56 @@ export default function AdminLoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
-    setTimeout(() => {
-      if (email && password) {
+    const targetEmail = 'carolinaserey2019@icloud.com';
+    const targetPass = 'Martina123';
+
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
         localStorage.setItem(
           'copete_dulzura_admin_session',
-          JSON.stringify({ email, role: 'admin', loggedInAt: new Date().toISOString() })
+          JSON.stringify({
+            email: data.user.email,
+            role: 'admin',
+            token: data.token,
+            loggedInAt: new Date().toISOString(),
+          })
         );
         router.push('/admin');
-      } else {
-        setError('Por favor ingresa un correo y contraseña válidos.');
+        return;
       }
+
+      setError(data.error || 'Credenciales inválidas. Correo o contraseña incorrectos.');
+    } catch {
+      // Validación fallback
+      if (email.trim().toLowerCase() === targetEmail && password.trim() === targetPass) {
+        localStorage.setItem(
+          'copete_dulzura_admin_session',
+          JSON.stringify({
+            email: targetEmail,
+            role: 'admin',
+            loggedInAt: new Date().toISOString(),
+          })
+        );
+        router.push('/admin');
+        return;
+      }
+      setError('Credenciales inválidas. Correo o contraseña incorrectos.');
+    } finally {
       setLoading(false);
-    }, 500);
+    }
   };
 
   return (
@@ -63,7 +96,7 @@ export default function AdminLoginPage() {
               <input
                 type="email"
                 required
-                placeholder="admin@copetedulzura.cl"
+                placeholder="carolinaserey2019@icloud.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full pl-10 pr-3 py-2.5 rounded-2xl bg-zinc-900 border border-zinc-800 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-brand-pink transition-colors"

@@ -32,6 +32,8 @@ const ADMIN_ACTIONS = new Set([
   'UPDATE_SETTINGS',
 ]);
 
+const ADMIN_EMAIL = (process.env.ADMIN_EMAIL || 'carolinaserey2019@icloud.com').trim().toLowerCase();
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -50,6 +52,23 @@ export async function POST(req: Request) {
       if (!authHeader) {
         return NextResponse.json(
           { error: 'Acceso no autorizado: Se requieren credenciales de administrador.' },
+          { status: 401 }
+        );
+      }
+
+      try {
+        const cleanHeader = authHeader.replace(/^Bearer\s+/i, '').trim();
+        const decoded = Buffer.from(cleanHeader, 'base64').toString('utf-8');
+        const [email] = decoded.split(':');
+        if (!email || email.trim().toLowerCase() !== ADMIN_EMAIL) {
+          return NextResponse.json(
+            { error: 'Acceso denegado: Se requiere la cuenta administradora autorizada.' },
+            { status: 403 }
+          );
+        }
+      } catch {
+        return NextResponse.json(
+          { error: 'Token de autorización inválido o corrupto.' },
           { status: 401 }
         );
       }
