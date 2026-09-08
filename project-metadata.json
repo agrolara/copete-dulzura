@@ -3,8 +3,9 @@
   "name": "Copete & Dulzura",
   "description": "Plataforma E-Commerce & POS Delivery de Coctelería Premium y Repostería Fina con checkout a WhatsApp, arquitectura en contenedores Docker y PostgreSQL Supabase",
   "version": "1.0.0",
-  "category": "E-Commerce / Food & Beverage / Finanzas",
-  "status": "ready",
+  "status": "live",
+  "liveUrl": "https://copeteydulzura.agrolara.dedyn.io",
+  "repository": "https://github.com/agrolara/copete-dulzura",
   "stack": {
     "frontend": [
       "Next.js 14 (App Router)",
