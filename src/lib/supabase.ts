@@ -1,0 +1,16 @@
+import { createClient } from '@supabase/supabase-js';
+import { Product, Promotion, Sale, Invoice, Expense } from '@/types';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://supabase.agrolara.dedyn.io';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey || 'dummy-key');
+
+export const STORAGE_BUCKET = process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET || 'copete-dulzura-media';
+
+// Datos iniciales base
+export const INITIAL_PRODUCTS: Product[] = [];
+export const INITIAL_PROMOTIONS: Promotion[] = [];
+export const INITIAL_SALES: Sale[] = [];
+export const INITIAL_INVOICES: Invoice[] = [];
+export const INITIAL_EXPENSES: Expense[] = [];

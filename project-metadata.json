@@ -1,0 +1,40 @@
+{
+  "id": "copete-dulzura",
+  "name": "Copete & Dulzura",
+  "description": "Plataforma E-Commerce & POS Delivery de Coctelería Premium y Repostería Fina con checkout a WhatsApp, arquitectura en contenedores Docker y PostgreSQL Supabase",
+  "version": "1.0.0",
+  "category": "E-Commerce / Food & Beverage / Finanzas",
+  "status": "ready",
+  "stack": {
+    "frontend": [
+      "Next.js 14 (App Router)",
+      "React 18",
+      "Tailwind CSS",
+      "Lucide Icons",
+      "Recharts"
+    ],
+    "backend": [
+      "Next.js Route Handlers",
+      "Node.js 22"
+    ],
+    "database": [
+      "Supabase PostgreSQL",
+      "Supabase Realtime"
+    ],
+    "storage": [
+      "Supabase Storage (copete-dulzura-media)"
+    ],
+    "infrastructure": [
+      "Coolify",
+      "Docker Multi-stage",
+      "Traefik",
+      "Let's Encrypt SSL"
+    ]
+  },
+  "metrics": {
+    "productsCount": 13,
+    "promotionsCount": 4,
+    "theme": "Luxury Dark Rose & Obsidian",
+    "productionBuild": "Standalone (Optimized)"
+  }
+}

@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #09080d;
+  --foreground: #fcfcfc;
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-jakarta);
+  overflow-x: hidden;
+  selection-background-color: #f43f5e;
+  selection-color: #ffffff;
+}
+
+::selection {
+  background: #f43f5e;
+  color: #ffffff;
+}
+
+/* Custom Scrollbar Chic */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09080d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #272036;
+  border-radius: 9999px;
+  border: 2px solid #09080d;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f43f5e;
+}
+
+/* Sombras y resplandores neón */
+.shadow-neon-pink {
+  box-shadow: 0 0 25px -4px rgba(244, 63, 94, 0.45);
+}
+
+.shadow-neon-hot {
+  box-shadow: 0 0 25px -4px rgba(236, 72, 153, 0.5);
+}
+
+.shadow-neon-wine {
+  box-shadow: 0 0 25px -4px rgba(136, 19, 55, 0.4);
+}

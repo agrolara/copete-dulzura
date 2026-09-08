@@ -1,0 +1,9 @@
+node_modules
+.next
+.DS_Store
+*.log
+.env.local
+.env*.local
+dist
+coverage
+data/copete_dulzura_store.json

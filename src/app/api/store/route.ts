@@ -1,0 +1,166 @@
+import { NextResponse } from 'next/server';
+import { getStoreAsync, saveStoreAsync } from '@/lib/serverStore';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+export async function GET() {
+  const store = await getStoreAsync();
+  return NextResponse.json(store, {
+    headers: {
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0, s-maxage=0',
+      Pragma: 'no-cache',
+      Expires: '0',
+      'Surrogate-Control': 'no-store',
+    },
+  });
+}
+
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
+    if (!body || typeof body !== 'object') {
+      return NextResponse.json({ error: 'Cuerpo de solicitud inválido' }, { status: 400 });
+    }
+
+    const { action, payload } = body;
+    if (!action || typeof action !== 'string') {
+      return NextResponse.json({ error: 'Acción requerida' }, { status: 400 });
+    }
+
+    const store = await getStoreAsync();
+
+    if (action === 'SAVE_ALL') {
+      if (!payload || typeof payload !== 'object') {
+        return NextResponse.json({ error: 'Payload inválido' }, { status: 400 });
+      }
+      if (Array.isArray(payload.products)) store.products = payload.products;
+      if (Array.isArray(payload.promotions)) store.promotions = payload.promotions;
+      if (Array.isArray(payload.sales)) store.sales = payload.sales;
+      if (Array.isArray(payload.invoices)) store.invoices = payload.invoices;
+      if (Array.isArray(payload.expenses)) store.expenses = payload.expenses;
+      if (Array.isArray(payload.inventoryMovements)) store.inventoryMovements = payload.inventoryMovements;
+      if (Array.isArray(payload.categories)) store.categories = payload.categories;
+      if (payload.footerSettings && typeof payload.footerSettings === 'object') store.footerSettings = payload.footerSettings;
+      if (typeof payload.globalLowStockThreshold === 'number') store.globalLowStockThreshold = payload.globalLowStockThreshold;
+      if (typeof payload.whatsappNumber === 'string') store.whatsappNumber = payload.whatsappNumber;
+      if (payload.bankDetails && typeof payload.bankDetails === 'object') store.bankDetails = payload.bankDetails;
+      await saveStoreAsync(store);
+      return NextResponse.json({ success: true, store });
+    }
+
+    if (action === 'UPDATE_CATEGORIES') {
+      if (Array.isArray(payload)) {
+        store.categories = payload;
+        await saveStoreAsync(store);
+      }
+      return NextResponse.json({ success: true, store });
+    }
+
+    if (action === 'UPDATE_FOOTER_SETTINGS') {
+      if (payload && typeof payload === 'object') {
+        store.footerSettings = payload;
+        await saveStoreAsync(store);
+      }
+      return NextResponse.json({ success: true, store });
+    }
+
+    if (action === 'UPDATE_EXPENSE') {
+      const expense = payload;
+      store.expenses = store.expenses.map((e) => (e.id === expense.id ? expense : e));
+      await saveStoreAsync(store);
+      return NextResponse.json({ success: true, store });
+    }
+
+    if (action === 'UPDATE_INVOICE') {
+      const { invoice, updatedProducts } = payload;
+      store.invoices = store.invoices.map((i) => (i.id === invoice.id ? invoice : i));
+      if (updatedProducts) {
+        store.products = updatedProducts;
+      }
+      await saveStoreAsync(store);
+      return NextResponse.json({ success: true, store });
+    }
+
+
+    if (action === 'UPDATE_PRODUCTS') {
+      store.products = payload;
+      await saveStoreAsync(store);
+      return NextResponse.json({ success: true, store });
+    }
+
+    if (action === 'UPDATE_PROMOTIONS') {
+      store.promotions = payload;
+      await saveStoreAsync(store);
+      return NextResponse.json({ success: true, store });
+    }
+
+    if (action === 'ADD_SALE') {
+      const { sale, updatedProducts } = payload;
+      store.sales = [sale, ...store.sales];
+      if (updatedProducts) {
+        store.products = updatedProducts;
+      }
+      await saveStoreAsync(store);
+      return NextResponse.json({ success: true, store });
+    }
+
+    if (action === 'DELETE_SALE') {
+      const { saleId, updatedProducts } = payload;
+      store.sales = store.sales.filter((s) => s.id !== saleId);
+      if (updatedProducts) {
+        store.products = updatedProducts;
+      }
+      await saveStoreAsync(store);
+      return NextResponse.json({ success: true, store });
+    }
+
+    if (action === 'CONFIRM_SALE') {
+      const { sale, updatedProducts } = payload;
+      store.sales = store.sales.map((s) => (s.id === sale.id ? sale : s));
+      if (updatedProducts) {
+        store.products = updatedProducts;
+      }
+      await saveStoreAsync(store);
+      return NextResponse.json({ success: true, store });
+    }
+
+    if (action === 'CANCEL_SALE') {
+      const { sale } = payload;
+      store.sales = store.sales.map((s) => (s.id === sale.id ? sale : s));
+      await saveStoreAsync(store);
+      return NextResponse.json({ success: true, store });
+    }
+
+    if (action === 'UPDATE_SALE') {
+      const { sale, updatedProducts } = payload;
+      store.sales = store.sales.map((s) => (s.id === sale.id ? sale : s));
+      if (updatedProducts) {
+        store.products = updatedProducts;
+      }
+      await saveStoreAsync(store);
+      return NextResponse.json({ success: true, store });
+    }
+
+    if (action === 'UPDATE_INVENTORY_SETTINGS') {
+      const { globalLowStockThreshold } = payload;
+      if (typeof globalLowStockThreshold === 'number') {
+        store.globalLowStockThreshold = globalLowStockThreshold;
+        await saveStoreAsync(store);
+      }
+      return NextResponse.json({ success: true, store });
+    }
+
+    if (action === 'UPDATE_SETTINGS') {
+      if (payload.whatsappNumber) store.whatsappNumber = payload.whatsappNumber;
+      if (payload.bankDetails) store.bankDetails = payload.bankDetails;
+      await saveStoreAsync(store);
+      return NextResponse.json({ success: true, store });
+    }
+
+    return NextResponse.json({ error: `Acción desconocida: ${action}` }, { status: 400 });
+  } catch (error: any) {
+    console.error('Error en API /api/store:', error);
+    return NextResponse.json({ error: error?.message || 'Error interno del servidor' }, { status: 500 });
+  }
+}

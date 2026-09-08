@@ -1,0 +1,357 @@
+{
+  "products": [
+    {
+      "id": "10000000-0000-0000-0000-000000000001",
+      "name": "Cheesecake Artesanal Frutos Rojos",
+      "description": "Cremoso cheesecake horneado estilo New York sobre base crocante de galleta, cubierto con generoso coulis de frambuesas y moras silvestres.",
+      "category": "Tortas & Cheesecakes",
+      "price": 18990,
+      "cost_price": 8500,
+      "stock": 12,
+      "min_stock_alert": 4,
+      "image_url": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=800&q=80",
+      "is_active": true
+    },
+    {
+      "id": "10000000-0000-0000-0000-000000000002",
+      "name": "Torta Cuatro Leches Tradicional",
+      "description": "Bizcochuelo húmedo bañado en leche condensada, evaporada, crema y manjar artesanal, decorado con suave merengue suizo.",
+      "category": "Tortas & Cheesecakes",
+      "price": 21990,
+      "cost_price": 9500,
+      "stock": 10,
+      "min_stock_alert": 3,
+      "image_url": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+      "is_active": true
+    },
+    {
+      "id": "10000000-0000-0000-0000-000000000003",
+      "name": "Caja Brownies Gourmet Fudgy (6 unidades)",
+      "description": "Brownies húmedos e intensos de chocolate belga 70% cacao con trozos de nueces tostadas y toffee salado.",
+      "category": "Pastelería & Brownies",
+      "price": 9990,
+      "cost_price": 4200,
+      "stock": 20,
+      "min_stock_alert": 5,
+      "image_url": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
+      "is_active": true
+    },
+    {
+      "id": "10000000-0000-0000-0000-000000000004",
+      "name": "Caja Macarons Franceses Surtidos (8 unidades)",
+      "description": "Exquisita selección de macarons artesanales: pistacho, frambuesa, chocolate belga y maracuyá.",
+      "category": "Pastelería & Brownies",
+      "price": 11990,
+      "cost_price": 5000,
+      "stock": 15,
+      "min_stock_alert": 4,
+      "image_url": "https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=800&q=80",
+      "is_active": true
+    },
+    {
+      "id": "10000000-0000-0000-0000-000000000005",
+      "name": "Tiramisú Clásico en Copa de Cristal",
+      "description": "Receta italiana con capas de galletas de champaña maceradas en café expreso e Illy con auténtico queso mascarpone.",
+      "category": "Postres en Vaso",
+      "price": 5490,
+      "cost_price": 2200,
+      "stock": 18,
+      "min_stock_alert": 5,
+      "image_url": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=800&q=80",
+      "is_active": true
+    },
+    {
+      "id": "20000000-0000-0000-0000-000000000001",
+      "name": "Licor Baileys Irish Cream 750ml",
+      "description": "La original crema irlandesa de whisky con notas de chocolate y vainilla. Ideal con hielo o sobre postres.",
+      "category": "Licores Dulces",
+      "price": 15990,
+      "cost_price": 9800,
+      "stock": 14,
+      "min_stock_alert": 4,
+      "image_url": "https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=800&q=80",
+      "is_active": true
+    },
+    {
+      "id": "20000000-0000-0000-0000-000000000002",
+      "name": "Espumante Chandon Brut Rosé 750ml",
+      "description": "Espumante de tonos rosa brillante, burbujas persistentes y aromáticas notas a frutos del bosque.",
+      "category": "Espumantes & Vinos",
+      "price": 16990,
+      "cost_price": 10200,
+      "stock": 16,
+      "min_stock_alert": 5,
+      "image_url": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80",
+      "is_active": true
+    },
+    {
+      "id": "20000000-0000-0000-0000-000000000003",
+      "name": "Gin Beefeater Pink Strawberry 700ml",
+      "description": "Gin londinense infusionado con fresas naturales, suave y aromático para cócteles refrescantes.",
+      "category": "Piscos & Destilados",
+      "price": 17490,
+      "cost_price": 10800,
+      "stock": 11,
+      "min_stock_alert": 3,
+      "image_url": "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80",
+      "is_active": true
+    },
+    {
+      "id": "20000000-0000-0000-0000-000000000004",
+      "name": "Pisco Alto del Carmen 35° Especial 1L",
+      "description": "Pisco chileno de destilación artesanal, envejecido en barricas de roble americano.",
+      "category": "Piscos & Destilados",
+      "price": 9490,
+      "cost_price": 5600,
+      "stock": 24,
+      "min_stock_alert": 6,
+      "image_url": "https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=800&q=80",
+      "is_active": true
+    },
+    {
+      "id": "20000000-0000-0000-0000-000000000005",
+      "name": "Vino Late Harvest Concha y Toro 750ml",
+      "description": "Vino dulce noble chileno con aromas a damasco, miel y cáscara de naranja confitada.",
+      "category": "Espumantes & Vinos",
+      "price": 5990,
+      "cost_price": 3100,
+      "stock": 18,
+      "min_stock_alert": 4,
+      "image_url": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80",
+      "is_active": true
+    },
+    {
+      "id": "20000000-0000-0000-0000-000000000006",
+      "name": "Pack Cerveza Corona Extra 6x330ml",
+      "description": "Six-pack de cerveza rubia mexicana de cuerpo ligero y burbuja refrescante.",
+      "category": "Cervezas",
+      "price": 7290,
+      "cost_price": 4300,
+      "stock": 22,
+      "min_stock_alert": 6,
+      "image_url": "https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=format&fit=crop&w=800&q=80",
+      "is_active": true
+    },
+    {
+      "id": "20000000-0000-0000-0000-000000000007",
+      "name": "Coca-Cola Sabor Original 1.5L",
+      "description": "Bebida gaseosa helada de 1.5 litros ideal para combinados y piscolas.",
+      "category": "Bebidas & Hielo",
+      "price": 2390,
+      "cost_price": 1300,
+      "stock": 30,
+      "min_stock_alert": 8,
+      "image_url": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=800&q=80",
+      "is_active": true
+    },
+    {
+      "id": "20000000-0000-0000-0000-000000000008",
+      "name": "Hielo Purificado Bolsa 2kg",
+      "description": "Bolsa de cubos de hielo macizos de agua 100% filtrada.",
+      "category": "Bebidas & Hielo",
+      "price": 1990,
+      "cost_price": 800,
+      "stock": 25,
+      "min_stock_alert": 5,
+      "image_url": "https://images.unsplash.com/photo-1516715094483-75da7dee9758?auto=format&fit=crop&w=800&q=80",
+      "is_active": true
+    }
+  ],
+  "promotions": [
+    {
+      "id": "30000000-0000-0000-0000-000000000001",
+      "name": "Pack Dulce Tentación (Baileys + Cheesecake Frutos Rojos)",
+      "description": "La combinación dulce perfecta: 1 Botella de Baileys Irish Cream 750ml, 1 Cheesecake Artesanal de Frutos Rojos y 1 Bolsa de Hielo 2kg.",
+      "promo_price": 32990,
+      "image_url": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=800&q=80",
+      "is_active": true,
+      "items": [
+        {
+          "product_id": "20000000-0000-0000-0000-000000000001",
+          "quantity": 1
+        },
+        {
+          "product_id": "10000000-0000-0000-0000-000000000001",
+          "quantity": 1
+        },
+        {
+          "product_id": "20000000-0000-0000-0000-000000000008",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "30000000-0000-0000-0000-000000000002",
+      "name": "Pack Brindis & Celebración (Chandon Rosé + Torta Cuatro Leches)",
+      "description": "Haz de tu noche un momento inolvidable: 1 Espumante Chandon Brut Rosé 750ml y 1 Torta Cuatro Leches Tradicional chilena.",
+      "promo_price": 35990,
+      "image_url": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80",
+      "is_active": true,
+      "items": [
+        {
+          "product_id": "20000000-0000-0000-0000-000000000002",
+          "quantity": 1
+        },
+        {
+          "product_id": "10000000-0000-0000-0000-000000000002",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "30000000-0000-0000-0000-000000000003",
+      "name": "Pack Previa Chic (Gin Pink + Brownies Gourmet)",
+      "description": "Previa con estilo: 1 Gin Beefeater Pink Strawberry 700ml con 1 Caja de 6 Brownies Fudgy de Chocolate Belga.",
+      "promo_price": 24990,
+      "image_url": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
+      "is_active": true,
+      "items": [
+        {
+          "product_id": "20000000-0000-0000-0000-000000000003",
+          "quantity": 1
+        },
+        {
+          "product_id": "10000000-0000-0000-0000-000000000003",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "30000000-0000-0000-0000-000000000004",
+      "name": "Pack Carrete Piscolero & Antojo Dulce",
+      "description": "1 Pisco Alto del Carmen 1L, 1 Coca-Cola 1.5L, 1 Bolsa de Hielo 2kg y 1 Tiramisú Clásico en Copa.",
+      "promo_price": 16990,
+      "image_url": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80",
+      "is_active": true,
+      "items": [
+        {
+          "product_id": "20000000-0000-0000-0000-000000000004",
+          "quantity": 1
+        },
+        {
+          "product_id": "20000000-0000-0000-0000-000000000007",
+          "quantity": 1
+        },
+        {
+          "product_id": "20000000-0000-0000-0000-000000000008",
+          "quantity": 1
+        },
+        {
+          "product_id": "10000000-0000-0000-0000-000000000005",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "sales": [
+    {
+      "id": "s1111111-0000-0000-0000-000000000001",
+      "customer_name": "Valentina Silva",
+      "customer_phone": "+56987654321",
+      "delivery_address": "Av. Vitacura 3450, Depto 502",
+      "payment_method": "transferencia",
+      "total_amount": 32990,
+      "status": "completed",
+      "created_at": "2026-09-06T22:30:00.000Z",
+      "items": [
+        {
+          "id": "it-1",
+          "sale_id": "s1111111-0000-0000-0000-000000000001",
+          "promotion_id": "30000000-0000-0000-0000-000000000001",
+          "item_name": "Pack Dulce Tentación (Baileys + Cheesecake)",
+          "quantity": 1,
+          "unit_price": 32990,
+          "cost_price": 19100
+        }
+      ]
+    },
+    {
+      "id": "s2222222-0000-0000-0000-000000000002",
+      "customer_name": "Camila Morales",
+      "customer_phone": "+56911223344",
+      "delivery_address": "Calle Las Tranqueras 1240",
+      "payment_method": "transferencia",
+      "total_amount": 24990,
+      "status": "completed",
+      "created_at": "2026-09-07T01:15:00.000Z",
+      "items": [
+        {
+          "id": "it-2",
+          "sale_id": "s2222222-0000-0000-0000-000000000002",
+          "promotion_id": "30000000-0000-0000-0000-000000000003",
+          "item_name": "Pack Previa Chic (Gin Pink + Brownies)",
+          "quantity": 1,
+          "unit_price": 24990,
+          "cost_price": 15000
+        }
+      ]
+    }
+  ],
+  "invoices": [
+    {
+      "id": "inv-1",
+      "invoice_number": "F-84920",
+      "supplier_name": "Distribuidora Gourmet & Lácteos del Sur",
+      "supplier_rut": "76.543.210-K",
+      "invoice_date": "2026-09-01",
+      "created_at": "2026-09-01T10:00:00.000Z",
+      "payment_method": "transferencia",
+      "total_amount": 85000,
+      "items": [
+        {
+          "id": "ii-1",
+          "product_id": "10000000-0000-0000-0000-000000000001",
+          "product_name": "Cheesecake Artesanal Frutos Rojos",
+          "category": "Tortas & Cheesecakes",
+          "quantity": 10,
+          "cost_price": 8500,
+          "total_cost": 85000,
+          "selling_price": 18990
+        }
+      ]
+    }
+  ],
+  "expenses": [
+    {
+      "id": "exp-1",
+      "description": "Cajas de torta y bolsas térmicas con cinta rosada",
+      "category": "Cajas, Cintas y Empaque de Regalo",
+      "amount": 25000,
+      "payment_method": "transferencia",
+      "date": "2026-09-02",
+      "created_at": "2026-09-02T12:00:00.000Z"
+    }
+  ],
+  "inventoryMovements": [],
+  "globalLowStockThreshold": 5,
+  "whatsappNumber": "56987654321",
+  "bankDetails": {
+    "banco": "Banco Santander / Banco de Chile",
+    "tipoCuenta": "Cuenta Corriente",
+    "numeroCuenta": "9876543210",
+    "rut": "77.654.321-9",
+    "nombre": "Copete & Dulzura SpA",
+    "email": "pagos@copetedulzura.cl"
+  },
+  "categories": [
+    "Tortas & Cheesecakes",
+    "Pastelería & Brownies",
+    "Postres en Vaso",
+    "Licores Dulces",
+    "Espumantes & Vinos",
+    "Piscos & Destilados",
+    "Cervezas",
+    "Bebidas & Hielo",
+    "Snacks & Otros"
+  ],
+  "footerSettings": {
+    "description": "La primera plataforma que une la coctelería y licores fríos con la repostería artesanal más exquisita. Tu previa o celebración en minutos.",
+    "scheduleLines": [
+      "Lunes a Miércoles: 18:00 - 02:00 hrs",
+      "Jueves a Sábado: 17:00 - 05:00 hrs",
+      "Domingos: 15:00 - 01:00 hrs",
+      "Despacho en 35 a 45 min"
+    ],
+    "paymentInfo": "Aceptamos Transferencia Electrónica y Efectivo al recibir tu pedido. Todas las compras se coordinan de forma segura por WhatsApp."
+  }
+}
