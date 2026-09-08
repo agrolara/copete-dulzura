@@ -7,6 +7,14 @@ export const metadata: Metadata = {
   title: 'Copete & Dulzura | Delivery Nocturno & Pastelería Fina',
   description:
     'El match perfecto: coctelería premium, piscos, espumantes rosé y la mejor repostería fina entregada en minutos a tu puerta.',
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
 };
 
 export default function RootLayout({
