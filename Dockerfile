@@ -3,14 +3,13 @@ FROM node:22-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-ENV NODE_ENV=development
 COPY package.json package-lock.json* ./
 RUN npm ci --include=dev
 
 # ETAPA 2: Builder
 FROM node:22-alpine AS builder
 WORKDIR /app
-ENV NODE_ENV=development
+ENV NODE_ENV=production
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
