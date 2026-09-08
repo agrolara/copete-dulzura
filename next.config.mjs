@@ -23,12 +23,32 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "**",
+        protocol: 'https',
+        hostname: 'supabase.agrolara.dedyn.io',
       },
       {
-        protocol: "http",
-        hostname: "**",
+        protocol: 'https',
+        hostname: 'drive.google.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dl.dropboxusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'copeteydulzura.agrolara.dedyn.io',
+      },
+      {
+        protocol: 'http',
+        hostname: '148.116.104.222',
       },
     ],
   },

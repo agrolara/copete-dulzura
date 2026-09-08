@@ -16,6 +16,22 @@ export async function GET() {
   });
 }
 
+const ADMIN_ACTIONS = new Set([
+  'SAVE_ALL',
+  'UPDATE_CATEGORIES',
+  'UPDATE_FOOTER_SETTINGS',
+  'UPDATE_EXPENSE',
+  'UPDATE_INVOICE',
+  'UPDATE_PRODUCTS',
+  'UPDATE_PROMOTIONS',
+  'DELETE_SALE',
+  'CONFIRM_SALE',
+  'CANCEL_SALE',
+  'UPDATE_SALE',
+  'UPDATE_INVENTORY_SETTINGS',
+  'UPDATE_SETTINGS',
+]);
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -26,6 +42,17 @@ export async function POST(req: Request) {
     const { action, payload } = body;
     if (!action || typeof action !== 'string') {
       return NextResponse.json({ error: 'Acción requerida' }, { status: 400 });
+    }
+
+    // Protección de seguridad para mutaciones administrativas
+    if (ADMIN_ACTIONS.has(action)) {
+      const authHeader = req.headers.get('x-admin-auth') || req.headers.get('authorization');
+      if (!authHeader) {
+        return NextResponse.json(
+          { error: 'Acceso no autorizado: Se requieren credenciales de administrador.' },
+          { status: 401 }
+        );
+      }
     }
 
     const store = await getStoreAsync();

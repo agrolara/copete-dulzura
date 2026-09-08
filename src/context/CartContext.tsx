@@ -191,11 +191,30 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const authFetch = (input: RequestInfo | URL, init?: RequestInit) => {
+    const headers = new Headers(init?.headers);
+    if (!headers.has('Content-Type')) {
+      headers.set('Content-Type', 'application/json');
+    }
+    if (typeof window !== 'undefined') {
+      try {
+        const session = localStorage.getItem('copete_dulzura_admin_session');
+        if (session) {
+          const parsed = JSON.parse(session);
+          if (parsed && parsed.email) {
+            headers.set('x-admin-auth', btoa(`${parsed.email}:${parsed.loggedInAt || 'admin'}`));
+          }
+        }
+      } catch {}
+    }
+    return fetch(input, { ...init, headers });
+  };
+
   const setProducts: React.Dispatch<React.SetStateAction<Product[]>> = (value) => {
     setProductsState((prev) => {
       const next = typeof value === 'function' ? value(prev) : value;
       saveLocalBackup({ products: next });
-      fetch('/api/store', {
+      authFetch('/api/store', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'UPDATE_PRODUCTS', payload: next }),
@@ -208,7 +227,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setPromotionsState((prev) => {
       const next = typeof value === 'function' ? value(prev) : value;
       saveLocalBackup({ promotions: next });
-      fetch('/api/store', {
+      authFetch('/api/store', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'UPDATE_PROMOTIONS', payload: next }),
@@ -221,7 +240,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setSalesState((prev) => {
       const next = typeof value === 'function' ? value(prev) : value;
       saveLocalBackup({ sales: next });
-      fetch('/api/store', {
+      authFetch('/api/store', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'SAVE_ALL', payload: { sales: next } }),
@@ -234,7 +253,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setInvoicesState((prev) => {
       const next = typeof value === 'function' ? value(prev) : value;
       saveLocalBackup({ invoices: next });
-      fetch('/api/store', {
+      authFetch('/api/store', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'SAVE_ALL', payload: { invoices: next } }),
@@ -247,7 +266,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setExpensesState((prev) => {
       const next = typeof value === 'function' ? value(prev) : value;
       saveLocalBackup({ expenses: next });
-      fetch('/api/store', {
+      authFetch('/api/store', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'SAVE_ALL', payload: { expenses: next } }),
@@ -260,7 +279,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setInventoryMovementsState((prev) => {
       const next = typeof value === 'function' ? value(prev) : value;
       saveLocalBackup({ inventoryMovements: next });
-      fetch('/api/store', {
+      authFetch('/api/store', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'SAVE_ALL', payload: { inventoryMovements: next } }),
@@ -273,7 +292,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const valid = Math.max(1, threshold);
     setGlobalLowStockThresholdState(valid);
     saveLocalBackup({ globalLowStockThreshold: valid });
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'UPDATE_INVENTORY_SETTINGS', payload: { globalLowStockThreshold: valid } }),
@@ -284,7 +303,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const sanitized = num.replace(/[^0-9]/g, '');
     setWhatsappNumberState(sanitized);
     saveLocalBackup({ whatsappNumber: sanitized });
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'UPDATE_SETTINGS', payload: { whatsappNumber: sanitized } }),
@@ -294,7 +313,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const setBankDetails = (details: BankDetails) => {
     setBankDetailsState(details);
     saveLocalBackup({ bankDetails: details });
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'UPDATE_SETTINGS', payload: { bankDetails: details } }),
@@ -305,7 +324,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const loadInitialStore = async () => {
       try {
-        const res = await fetch('/api/store', { cache: 'no-store' });
+        const res = await authFetch('/api/store', { cache: 'no-store' });
         if (res.ok) {
           const data = await res.json();
           if (data && typeof data === 'object') {
@@ -514,7 +533,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     clearCart();
 
     // Notificar al backend
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -618,7 +637,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setProducts(updatedProducts);
     setSales((prev) => [newSale, ...prev]);
 
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -743,7 +762,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     setSales((prev) => prev.filter((s) => s.id !== saleId));
 
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -760,7 +779,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const updatedSale: Sale = { ...sale, status: 'completed' };
     setSales((prev) => prev.map((s) => (s.id === saleId ? updatedSale : s)));
 
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'CONFIRM_SALE', payload: { sale: updatedSale } }),
@@ -793,7 +812,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const updatedSale: Sale = { ...sale, status: 'cancelled' };
     setSales((prev) => prev.map((s) => (s.id === saleId ? updatedSale : s)));
 
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'CANCEL_SALE', payload: { sale: updatedSale, updatedProducts } }),
@@ -811,7 +830,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const next = [...categories, trimmed];
     setCategoriesState(next);
     saveLocalBackup({ categories: next });
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'UPDATE_CATEGORIES', payload: next }),
@@ -828,7 +847,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const updatedProducts = products.map((p) => (p.category === oldName ? { ...p, category: trimmed } : p));
     setProducts(updatedProducts);
     saveLocalBackup({ categories: next, products: updatedProducts });
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'UPDATE_CATEGORIES', payload: next }),
@@ -840,7 +859,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const next = categories.filter((c) => c !== name);
     setCategoriesState(next);
     saveLocalBackup({ categories: next });
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'UPDATE_CATEGORIES', payload: next }),
@@ -851,7 +870,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const setFooterSettings = (settings: FooterSettings) => {
     setFooterSettingsState(settings);
     saveLocalBackup({ footerSettings: settings });
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'UPDATE_FOOTER_SETTINGS', payload: settings }),
@@ -889,7 +908,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
 
     setSales((prev) => prev.map((s) => (s.id === updatedSale.id ? updatedSale : s)));
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'UPDATE_SALE', payload: { sale: updatedSale, updatedProducts: revertPreviousStock ? nextProducts : undefined } }),
@@ -963,7 +982,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
 
     setInvoices((prev) => prev.map((i) => (i.id === invoiceData.id ? invoiceData : i)));
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'UPDATE_INVOICE', payload: { invoice: invoiceData, updatedProducts: nextProducts } }),
@@ -1002,7 +1021,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const updateExpense = async (expenseData: Expense) => {
     setExpenses((prev) => prev.map((e) => (e.id === expenseData.id ? expenseData : e)));
-    fetch('/api/store', {
+    authFetch('/api/store', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'UPDATE_EXPENSE', payload: expenseData }),
